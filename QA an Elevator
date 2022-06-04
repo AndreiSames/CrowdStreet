@@ -1,0 +1,15 @@
+Feature: Elevator use.
+User Story: As a regular person, I should be able to use the elevator by using any button from any floor to call the elevator and use it to take me to my desired level.
+
+Scenario 1: Using the elevator from any floor.
+When clicking on the button narrow down-button or narrow up-button the doors should open if the elevator is on the same level where I am 
+Or come up or down to where my level is if its not on the same level where I am.
+Then doors should open and stay open for at least 5-7 seconds or as long as the safety implies.
+When selecting the floor # I want to go
+Then the elevator should have its doors already closed and take me to my next level.
+When arrived to my level then the doors should open and stay open for 5-7 seconds or as much as the safety implies.
+
+Scenario 2: 5th floor has a broken elevator button.
+When selecting the 5th floor from any other 
+Then the elevator should take me there
+And the doors should stay open all the time while on the 5th floor in order the elevator to be used or until is called from a different floor
