@@ -1,0 +1,63 @@
+CREATE TABLE people(id SERIAL PRIMARY KEY,
+					name varchar(50));
+					
+CREATE TABLE vehicle(id SERIAL PRIMARY KEY,
+					name varchar(30));
+					
+CREATE TABLE pet(id SERIAL PRIMARY KEY,
+				name varchar(30));
+				
+INSERT INTO people(name) VALUES('John');
+INSERT INTO people(name) VALUES('Mary');
+INSERT INTO people(name) VALUES('Chen');
+
+INSERT INTO vehicle(name) VALUES('Truck');
+INSERT INTO vehicle(name) VALUES('Car');
+INSERT INTO vehicle(name) VALUES('Bike');
+
+INSERT INTO pet(name) VALUES('Dog');
+INSERT INTO pet(name) VALUES('Cat');
+INSERT INTO pet(name) VALUES('Parrot');
+
+#####
+## SQL Skills- Part 1
+####
+#A
+
+CREATE TABLE people_vehicle(
+people_id integer NOT NULL REFERENCES people(id),
+vehicle_id integer NOT NULL REFERENCES vehicle(id))
+
+INSERT INTO people_vehicle(people_id,vehicle_id) VALUES(2,1);
+INSERT INTO people_vehicle(people_id,vehicle_id) VALUES(1,1);
+INSERT INTO people_vehicle(people_id,vehicle_id) VALUES(1,1);
+INSERT INTO people_vehicle(people_id,vehicle_id) VALUES(1,2);
+INSERT INTO people_vehicle(people_id,vehicle_id) VALUES(1,2);
+
+SELECT * FROM people_vehicle
+
+#B
+CREATE TABLE people_pet(
+people_id integer NOT NULL REFERENCES people(id),
+pet_id integer NOT NULL REFERENCES pet(id));
+
+INSERT INTO people_pet(people_id, pet_id) VALUES(1,1);
+INSERT INTO people_pet(people_id, pet_id) VALUES(3,3);
+INSERT INTO people_pet(people_id, pet_id) VALUES(3,2);
+
+SELECT* FROM people_pet WHERE people_id =3
+
+#C I am sorry but i coulnt figure this step out...
+
+
+#D
+SELECT p.name, COUNT(*) as numb FROM people_vehicle pv INNER JOIN people p
+on p.id= pv.people_id
+GROUP BY 1
+HAVING COUNT(*) > 1 
+UNION ALL
+SELECT p.name, COUNT(*) as numb FROM people_pet pp INNER JOIN people p
+ON p.id = pp.people_id
+GROUP BY 1
+HAVING COUNT(*) > 1
+	
